@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">きりんさんぷらー</string>
+    <string name="about">きりんさんについて</string>
+    <string name="cloud">きりんさんぷらークラウド</string>
+    <string name="share">共有</string>
+    <string name="share_text">きりんさんぷらーで遊びましょう！</string>
+    <string name="socket_enabled">クラウド連携有効</string>
+    <string name="socket_disabled">クラウド連携無効</string>
+
+</resources>

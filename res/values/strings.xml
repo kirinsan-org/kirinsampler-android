@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Kirinsampler</string>
+    <string name="about">about kirinsan</string>
+    <string name="cloud">Kirinsampler cloud</string>
+    <string name="share">Share</string>
+    <string name="share_text">Let\'s play with kirinsampler!</string>
+    <string name="socket_enabled">socket.io enabled</string>
+    <string name="socket_disabled">socket.io disabled</string>
+
+</resources>
