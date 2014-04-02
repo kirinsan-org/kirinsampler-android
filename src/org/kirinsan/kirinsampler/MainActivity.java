@@ -33,7 +33,7 @@ import android.webkit.WebViewClient;
 import android.widget.SeekBar;
 
 @SuppressLint("SetJavaScriptEnabled")
-@EActivity(R.layout.activity_main)
+@EActivity(R.layout.activity_sampler)
 @OptionsMenu(R.menu.activity_main)
 public class MainActivity extends Activity {
 	private SoundPool sp;

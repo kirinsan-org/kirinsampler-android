@@ -8,5 +8,9 @@
     <string name="share_text">きりんさんぷらーで遊びましょう！</string>
     <string name="socket_enabled">クラウド連携有効</string>
     <string name="socket_disabled">クラウド連携無効</string>
+    <string name="app_name_god">きりんのかみさま</string>
+    <string name="remote_device_disconnected">リモートデバイスとの通信が切断されました</string>
+    <string name="disconnect">接続解除</string>
+    <string name="disconnected">接続解除しました</string>
 
 </resources>

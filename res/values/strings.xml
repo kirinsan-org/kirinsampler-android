@@ -8,5 +8,9 @@
     <string name="share_text">Let\'s play with kirinsampler!</string>
     <string name="socket_enabled">socket.io enabled</string>
     <string name="socket_disabled">socket.io disabled</string>
+    <string name="app_name_god">God Kirin)</string>
+    <string name="remote_device_disconnected">Remote device was Disconnected</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="disconnected">Disconnected</string>
 
 </resources>

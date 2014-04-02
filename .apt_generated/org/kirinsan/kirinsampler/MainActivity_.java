@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,7 +38,7 @@ public final class MainActivity_
         init_(savedInstanceState);
         super.onCreate(savedInstanceState);
         OnViewChangedNotifier.replaceNotifier(previousNotifier);
-        setContentView(layout.activity_main);
+        setContentView(layout.activity_sampler);
     }
 
     private void init_(Bundle savedInstanceState) {
@@ -64,6 +65,10 @@ public final class MainActivity_
 
     public static MainActivity_.IntentBuilder_ intent(Context context) {
         return new MainActivity_.IntentBuilder_(context);
+    }
+
+    public static MainActivity_.IntentBuilder_ intent(Fragment supportFragment) {
+        return new MainActivity_.IntentBuilder_(supportFragment);
     }
 
     @Override
@@ -164,10 +169,17 @@ public final class MainActivity_
 
         private Context context_;
         private final Intent intent_;
+        private Fragment fragmentSupport_;
 
         public IntentBuilder_(Context context) {
             context_ = context;
             intent_ = new Intent(context, MainActivity_.class);
+        }
+
+        public IntentBuilder_(Fragment fragment) {
+            fragmentSupport_ = fragment;
+            context_ = fragment.getActivity();
+            intent_ = new Intent(context_, MainActivity_.class);
         }
 
         public Intent get() {
@@ -184,10 +196,14 @@ public final class MainActivity_
         }
 
         public void startForResult(int requestCode) {
-            if (context_ instanceof Activity) {
-                ((Activity) context_).startActivityForResult(intent_, requestCode);
+            if (fragmentSupport_!= null) {
+                fragmentSupport_.startActivityForResult(intent_, requestCode);
             } else {
-                context_.startActivity(intent_);
+                if (context_ instanceof Activity) {
+                    ((Activity) context_).startActivityForResult(intent_, requestCode);
+                } else {
+                    context_.startActivity(intent_);
+                }
             }
         }
 
