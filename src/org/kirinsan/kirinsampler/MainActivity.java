@@ -10,6 +10,13 @@ import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.OptionsItem;
+import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.SeekBarProgressChange;
+import org.androidannotations.annotations.ViewById;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
@@ -25,31 +32,23 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.SeekBar;
 
-import com.googlecode.androidannotations.annotations.AfterViews;
-import com.googlecode.androidannotations.annotations.Background;
-import com.googlecode.androidannotations.annotations.EActivity;
-import com.googlecode.androidannotations.annotations.OptionsItem;
-import com.googlecode.androidannotations.annotations.OptionsMenu;
-import com.googlecode.androidannotations.annotations.SeekBarProgressChange;
-import com.googlecode.androidannotations.annotations.ViewById;
-
 @SuppressLint("SetJavaScriptEnabled")
 @EActivity(R.layout.activity_main)
 @OptionsMenu(R.menu.activity_main)
 public class MainActivity extends Activity {
-	private SoundPool                         sp;
-	private static final Map<String, Integer> map           = new HashMap<String, Integer>();
-	private SocketIO                          socket;
-	private float                             playRate      = 1.0f;
-	private boolean                           socketEnabled = true;
+	private SoundPool sp;
+	private static final Map<String, Integer> map = new HashMap<String, Integer>();
+	private SocketIO socket;
+	private float playRate = 1.0f;
+	private boolean socketEnabled = true;
 
 	@ViewById
-	WebView                                   webview;
+	WebView webview;
 
 	@AfterViews
 	void init() {
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
-		
+
 		webview.getSettings().setJavaScriptEnabled(true);
 		webview.addJavascriptInterface(this, "android");
 		webview.setWebViewClient(new WebViewClient());
@@ -68,7 +67,7 @@ public class MainActivity extends Activity {
 
 	@Background
 	void loadSounds() {
-		sp = new SoundPool(8, AudioManager.STREAM_MUSIC, 1);
+		sp = new SoundPool(16, AudioManager.STREAM_MUSIC, 1);
 
 		for (Field field : R.raw.class.getFields()) {
 			try {
@@ -87,19 +86,24 @@ public class MainActivity extends Activity {
 			socket = new SocketIO();
 			socket.connect("http://world.kirinsan.org:4040", new IOCallback() {
 				@Override
-				public void onMessage(JSONObject arg0, IOAcknowledge arg1) {}
+				public void onMessage(JSONObject arg0, IOAcknowledge arg1) {
+				}
 
 				@Override
-				public void onMessage(String arg0, IOAcknowledge arg1) {}
+				public void onMessage(String arg0, IOAcknowledge arg1) {
+				}
 
 				@Override
-				public void onError(SocketIOException arg0) {}
+				public void onError(SocketIOException arg0) {
+				}
 
 				@Override
-				public void onDisconnect() {}
+				public void onDisconnect() {
+				}
 
 				@Override
-				public void onConnect() {}
+				public void onConnect() {
+				}
 
 				@Override
 				public void on(String message, IOAcknowledge arg1, Object... id) {
@@ -167,7 +171,7 @@ public class MainActivity extends Activity {
 	@OptionsItem
 	void socketSwitch(MenuItem item) {
 		socketEnabled = !socketEnabled;
-		
+
 		if (socketEnabled) {
 			item.setTitle(R.string.socket_enabled);
 		} else {
