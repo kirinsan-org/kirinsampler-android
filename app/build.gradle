@@ -1,0 +1,19 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.1'
+    defaultConfig {
+        applicationId 'org.kirinsan.kirinsampler'
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 4
+        versionName '3.0'
+    }
+}
+
+dependencies {
+    annotationProcessor 'org.androidannotations:androidannotations:4.3.1'
+    compile 'org.androidannotations:androidannotations-api:4.3.1'
+    compile 'com.android.support:appcompat-v7:26.+'
+}
