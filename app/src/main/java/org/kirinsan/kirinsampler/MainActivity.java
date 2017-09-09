@@ -10,6 +10,11 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.SeekBar;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
@@ -27,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private SoundPool sp;
     private static final Map<String, Integer> map = new HashMap<String, Integer>();
     private float playRate = 1.0f;
+    private long offset; // サーバーとの時差
 
     @ViewById
     WebView webview;
@@ -41,6 +47,47 @@ public class MainActivity extends AppCompatActivity {
         webview.setWebChromeClient(new WebChromeClient());
 
         webview.loadUrl("file:///android_asset/index.html");
+
+        final FirebaseDatabase db = FirebaseDatabase.getInstance();
+        db.getReference(".info/serverTimeOffset").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                offset = dataSnapshot.getValue(Long.TYPE);
+
+                db.getReference("sound").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        SoundInfo sound = snapshot.getValue(SoundInfo.class);
+                        if (sound != null) {
+                            long timeFromLastSound = Math.abs(sound.time - estimatedServerTime());
+
+                            // Ignore far past events
+                            if (timeFromLastSound < 1000) {
+                                play(sound.id);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+    /**
+     * サーバーの時刻を返す。
+     *
+     * @return
+     */
+    private long estimatedServerTime() {
+        return System.currentTimeMillis() + offset;
     }
 
     @Override
@@ -77,8 +124,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @JavascriptInterface
-    public void play(String id) {
-        sp.play(map.get(id), 1.0f, 1.0f, 1, 0, playRate);
+    public void setSoundId(String id) {
+        FirebaseDatabase.getInstance().getReference("sound").setValue(new SoundInfo(id, estimatedServerTime()));
+    }
+
+    private void play(String id) {
+        Integer soundID = map.get(id);
+        if (soundID != null) {
+            sp.play(soundID, 1.0f, 1.0f, 1, 0, playRate);
+        }
     }
 
     @SeekBarProgressChange(R.id.bar)

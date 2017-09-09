@@ -4,6 +4,6 @@ $(function () {
 	function onClickPad() {
 		var sounds = $(this).data('sound').split(',');
 		var id = sounds[Math.floor(Math.random() * sounds.length)];
-		android.play(id);
+		android.setSoundId(id);
 	}
 });

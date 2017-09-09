@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "785409348564",
+    "firebase_url": "https://kirinsampler-1142.firebaseio.com",
+    "project_id": "kirinsampler-1142",
+    "storage_bucket": "kirinsampler-1142.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785409348564:android:a837a131993feeeb",
+        "android_client_info": {
+          "package_name": "org.kirinsan.kirinsampler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "785409348564-gtui87ocpj2a028is3e41nb2a46egoen.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.kirinsan.kirinsampler",
+            "certificate_hash": "06ff9a96dbedca3c791591334c6b8255b6b7c16c"
+          }
+        },
+        {
+          "client_id": "785409348564-uv40tahqlio5vdq6mtfnk0a0i9jqfigg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA61QVyxECSLKvTq3kSaYDPXkEEo_34r0g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "785409348564-uv40tahqlio5vdq6mtfnk0a0i9jqfigg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

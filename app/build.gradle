@@ -16,4 +16,7 @@ dependencies {
     annotationProcessor 'org.androidannotations:androidannotations:4.3.1'
     compile 'org.androidannotations:androidannotations-api:4.3.1'
     compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.google.firebase:firebase-database:11.0.4'
 }
+
+apply plugin: 'com.google.gms.google-services'
